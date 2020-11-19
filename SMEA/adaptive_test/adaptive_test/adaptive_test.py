@@ -52,6 +52,7 @@ class AdaptiveTestXBlock(XBlock):
         frag = Fragment(html.format(self=self))
         
         frag.add_css(self.resource_string("static/css/adaptive_test.css"))
+        frag.add_css(self.resource_string("static/css/bootstrap.css"))
 
         frag.add_javascript(self.resource_string("static/js/src/jquery-1.12.4.js"))
         frag.add_javascript(self.resource_string("static/js/src/jquery-ui.js"))
@@ -71,6 +72,7 @@ class AdaptiveTestXBlock(XBlock):
             frag.add_javascript(self.resource_string("static/js/src/studio_analytics.js"))
             
             frag.add_css(self.resource_string("static/css/adaptive_test.css"))        
+            frag.add_css(self.resource_string("static/css/bootstrap.css"))
             frag.initialize_js('StudioAnalyticsXBlock') # Notice
 
         else:
@@ -79,6 +81,7 @@ class AdaptiveTestXBlock(XBlock):
             frag.add_javascript(self.resource_string("static/js/src/studio_adaptive_test.js"))
 
             frag.add_css(self.resource_string("static/css/adaptive_test.css"))        
+            frag.add_css(self.resource_string("static/css/bootstrap.css"))
             frag.initialize_js('StudioAdaptiveTestXBlock') # Notice
 
         return frag
