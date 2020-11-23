@@ -1,7 +1,7 @@
 """An adaptive-learning testing xblock"""
 
 import pkg_resources
-
+import psycopg2
 from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, JSONField, Scope
 from xblock.fragment import Fragment
@@ -138,6 +138,18 @@ class AdaptiveTestXBlock(XBlock):
         An example handler, which increments the data.
         """
         return self.testResults
+    #*********Database Handler***********
+    @XBlock.json_handler
+    def update(self, data, suffix=''):
+        #Database, user and password must be changed according to the local database
+        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020',host='localhost')
+        cur = conn.cursor()
+        cur.execute("INSERT INTO resultadostest (fecha, nombre_test, resultado) VALUES (CURRENT_DATE,%s, %s)", (data['test_name'], data['result']))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return True
+
 
     # Workbench scenarios. Ignore, unless you know how to use them.
     @staticmethod

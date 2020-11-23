@@ -3,6 +3,8 @@ function StudentAdaptiveTestXBlock(runtime, element) {
     // See load and submit funcions at python script
     var handlerUrlLoad = runtime.handlerUrl(element, 'load_test');
     var handlerUrlSubmit = runtime.handlerUrl(element, 'submit_test');
+    //*********** DATABASE HANDLER BIN*********
+    var handlerUrlUpdate = runtime.handlerUrl(element, 'update');   
 
     // On document load
     $(function ($) {
@@ -23,7 +25,7 @@ function StudentAdaptiveTestXBlock(runtime, element) {
                     // Avoid fake submitments
                     $("#submit-test").attr("disabled", true);
                     // Displays result
-                    $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(data.test_result.result) + JSON.stringify(data.test_result.result_details)+'.</p>')
+                    $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(data.test_result.result) + JSON.stringify(data.test_result.result_details)+ '.</p>')
                 } else {
                     if (data.test == 0) loadAlreadyPresented();
                     if (data.test == 1) loadKolb();
@@ -41,10 +43,23 @@ function StudentAdaptiveTestXBlock(runtime, element) {
         $("#submit-test").click(function () {
             // Uploads a result: { 'result': 'convergente <or any>' }
             var result = {};
-            if (test == 1) result = getTestKolbResults();
-            if (test == 2) result = getTestHerrmannResults();
-            if (test == 3) result = getTestInteligencias();
-            if (test == 4) result = getTestHoneyAlonso();
+            var test_name = ""; // ******** DATABASE VARIABLE ********
+            if (test == 1) {
+                result = getTestKolbResults();
+                test_name = "Kolb"
+            }
+            if (test == 2) { 
+                result = getTestHerrmannResults();
+                test_name = "Hermann"
+            }
+            if (test == 3) {
+                result = getTestInteligencias();
+                test_name = "Inteligencias Multiples"
+            }
+            if (test == 4) {
+                result = getTestHoneyAlonso();
+                test_name = "Honey-Alonso"
+            }
             
 
             $.ajax({
@@ -60,6 +75,12 @@ function StudentAdaptiveTestXBlock(runtime, element) {
 
                     // Displays result
                     $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(result.result) + '.</p>')
+
+                    $.ajax({
+                        type: "POST",
+                        url: handlerUrlUpdate,
+                        data: JSON.stringify({"test_name": test_name, "result": result.result })
+                    });
                 }
             });
         });
