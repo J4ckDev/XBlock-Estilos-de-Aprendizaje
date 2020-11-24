@@ -1,0 +1,104 @@
+/* main */
+main {
+  background-color: #e8e3dc;
+  margin: 2vh 1vw;
+  min-width: 96vw;
+  padding: 5vh 5vw;
+  border: 1px solid gray;
+  border-radius: 10px;
+  max-height: 40vh;
+  color: black;
+}
+.main-tag:hover .fa-lightbulb {
+  color: #ff9900;
+}
+
+.main-title:hover span {
+  color: #ff9900;
+}
+
+main p {
+  margin: 0
+}
+.main-tag {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+.main-img {
+  display: inline;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-title {
+  font-size: 3.5vw;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+}
+
+.main-content {
+  text-align: justify;
+  font-size: 1.4vw;
+  font-weight: 500;
+
+  display: flex;
+  justify-content:flex-end;
+  align-items: center;
+}
+.fa-lightbulb {
+  font-size: 15vw;
+}
+.fa-lightbulb:hover {
+  transform: scale(1.5);
+}
+
+/* survey */
+.survey {
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 0 1vw;
+  min-width: 96vw;
+  margin-bottom: 2vh;
+  background-color: #e8e3dc;
+}
+.pregunta {
+  margin: 1rem 0;
+}
+.card {
+  font-size: 1.5rem;
+  font-weight: bold;
+  min-width: 20rem;
+  min-height: 18.2rem;
+}
+
+.card-title {
+  text-align: justify;
+  font-size: 1.2rem;
+}
+.card-text {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 5%;
+}
+.card-edited{
+  background-color: rgb(148, 45, 168);
+}
+ /* Submit  */
+.btn-cont {
+  display: flex;
+  justify-content: center;
+  margin: 2vh 0;
+}
+.btn-submit {
+  font-size: 4vw;
+  width: 50vw;
+}

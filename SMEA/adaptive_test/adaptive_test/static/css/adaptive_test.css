@@ -1,0 +1,22 @@
+ul li{
+    list-style: none;
+}
+
+.alert{
+    cursor: pointer;
+    transition: transform 0.2s ease 0.2s
+}
+
+.alert:active{
+    -webkit-box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.2);
+    transform: rotate(-5deg);
+    z-index: 1;
+}
+
+#testContainer .bloque {
+    margin: 20px 0;
+    padding-left: 1.5rem;
+    border-left: 5px solid #ee6e73;
+}
