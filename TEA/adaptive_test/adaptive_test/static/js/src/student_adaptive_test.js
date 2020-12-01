@@ -11,21 +11,22 @@ function StudentAdaptiveTestXBlock(runtime, element) {
         window.test = 0;
         // Load the selected test. 
         // data: { test: number, test_result: optional_object }
+
         $.ajax({
             type: "POST",
             url: handlerUrlLoad,
-            data: "null", // No return needed.
-            dataType: 'json',
+            data: "null",
             success: function (data) {
                 window.test = data.test;
 
                 if (data.test_result) {
                     // Clear GUI
+
                     $("#test").empty();
                     // Avoid fake submitments
                     $("#submit-test").attr("disabled", true);
                     // Displays result
-                    $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(data.test_result.result) + JSON.stringify(data.test_result.result_details)+ '.</p>')
+                    $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(data.test_result)+ '.</p>')
                 } else {
                     if (data.test == 0) loadAlreadyPresented();
                     if (data.test == 1) loadKolb();
@@ -75,7 +76,7 @@ function StudentAdaptiveTestXBlock(runtime, element) {
 
                     // Displays result
                     $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(result.result) + '.</p>')
-
+                    // send test results to the python file, so they can be uploaded to database
                     $.ajax({
                         type: "POST",
                         url: handlerUrlUpdate,
@@ -110,7 +111,7 @@ function StudentAdaptiveTestXBlock(runtime, element) {
     }
 
     function loadAlreadyPresented() {
-        html = '<p>Este test no está disponible.</p>';
+        html = '<p>El test no está disponible.</p>';
         $("#test").html(html);
         $("#submit-test").attr("disabled", true);
     }
