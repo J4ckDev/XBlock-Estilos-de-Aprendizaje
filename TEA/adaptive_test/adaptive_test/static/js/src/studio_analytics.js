@@ -18,11 +18,17 @@ function StudioAnalyticsXBlock(runtime, element) {
                 //show database results (student id, date, test name and test result) in an HTML table 
                 data.map((student) => {
                     var html = ''
+
+                    if (student.test == 1) test_name = "Kolb"
+                    if (student.test == 2) test_name = "Hermann"
+                    if (student.test == 3) test_name = "Inteligencias Multiples"
+                    if (student.test == 4) test_name = "Honey-Alonso"
+
                     html += '<tr>'
-                    html += '<td>' + student.id_estudiante + '</td>'
-                    html += '<td>' + student.fecha + '</td>'
-                    html += '<td>' + student.test + '</td>'
-                    html += '<td>' + student.resultado + '</td>'
+                    html += '<td>' + student.user_id + '</td>'
+                    //html += '<td>' + student.fecha + '</td>'
+                    html += '<td>' + test_name + '</td>'
+                    html += '<td>' + student.result.result + '</td>'
                     html += '</tr>'
                     $("#analytics-table").append(html);
                 })

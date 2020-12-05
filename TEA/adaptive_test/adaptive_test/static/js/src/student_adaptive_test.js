@@ -26,7 +26,7 @@ function StudentAdaptiveTestXBlock(runtime, element) {
                     // Avoid fake submitments
                     $("#submit-test").attr("disabled", true);
                     // Displays result
-                    $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(data.test_result)+ '.</p>')
+                    $("#test").append('<p> Tu test ha revelado que eres ' + JSON.stringify(data.test_result.result)+ '.</p>')
                 } else {
                     if (data.test == 0) loadAlreadyPresented();
                     if (data.test == 1) loadKolb();
