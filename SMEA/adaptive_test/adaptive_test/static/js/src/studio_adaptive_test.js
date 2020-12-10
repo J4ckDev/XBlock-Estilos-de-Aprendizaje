@@ -15,8 +15,8 @@ function StudioAdaptiveTestXBlock(runtime, element) {
                 success: function (data) {
                     if(index==0) alert("Kolb seleccionado con éxito");
                     if(index==1) alert("Dominancia Cerebral seleccionado con éxito")
-                    if(index==2) alert("Inteligencias Multiples seleccionado con éxito")
-                    if(index==3) alert("Honey Alonso seleccionado con éxito")
+		            if(index==2) alert("Inteligencias Multiples seleccionado con éxito")
+                    if(index==3) alert("Honey-Alonso seleccionado con éxito")
                 }
             });
         })

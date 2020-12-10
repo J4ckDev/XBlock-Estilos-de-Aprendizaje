@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Setup for adaptive_test XBlock."""
+"""Setup for myxblock XBlock."""
 
 from __future__ import absolute_import
 
@@ -25,20 +24,20 @@ def package_data(pkg, roots):
 
 
 setup(
-    name='adaptive_test-xblock',
+    name='myxblock-xblock',
     version='0.1',
-    description='adaptive_test XBlock',   # TODO: write a better description.
+    description='myxblock XBlock',   # TODO: write a better description.
     license='UNKNOWN',          # TODO: choose a license: 'AGPL v3' and 'Apache 2.0' are popular.
     packages=[
-        'adaptive_test',
+        'myxblock',
     ],
     install_requires=[
         'XBlock',
     ],
     entry_points={
         'xblock.v1': [
-            'adaptive_test = adaptive_test:AdaptiveTestXBlock',
+            'myxblock = myxblock:MyXBlock',
         ]
     },
-    package_data=package_data("adaptive_test", ["static", "public"]),
+    package_data=package_data("myxblock", ["static", "public"]),
 )

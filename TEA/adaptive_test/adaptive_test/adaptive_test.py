@@ -1,7 +1,7 @@
 """An adaptive-learning testing xblock"""
 
 import pkg_resources
-import psycopg2
+#import psycopg2
 from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, JSONField, Scope
 from xblock.fragment import Fragment
@@ -102,6 +102,7 @@ class AdaptiveTestXBlock(XBlock):
         Handler that returns the test currently used
         """
         #Create variables according to test numbers, to be compared with the tests names in databes
+        """
         test_name = "Not selected"
         if (self.testNumber == 1):
             test_name = "Kolb"
@@ -126,7 +127,14 @@ class AdaptiveTestXBlock(XBlock):
             if((str(rows[i][1]) == self.scope_ids.user_id) and (rows[i][3]==test_name)):
                 flag = True
                 result = rows[i][4]
+        """
         # Returns results in case student already has resolved teh selected test, returns only the test number otherwise. 
+        flag = False
+        for i in range (len(self.testResults)):
+            if ( (self.testResults[i]["user_id"]==self.scope_ids.user_id) and (self.testResults[i]["test"]==self.testNumber)):
+                flag = True
+                result = self.testResults[i]["result"]
+        
         if flag:
             return { 'test': self.testNumber, 'test_result': result }
         else:
@@ -168,6 +176,7 @@ class AdaptiveTestXBlock(XBlock):
         An example handler, which increments the data.
         """
         #Database query to bring all data, ando show it in studio_analytics view
+        """
         conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020', host='localhost')
         cur3 = conn.cursor()
         cur3.execute("SELECT * FROM resultadostest ORDER BY id_estudiante")
@@ -182,8 +191,10 @@ class AdaptiveTestXBlock(XBlock):
             individual_result["test"] = rows[i][3]
             individual_result["resultado"] = rows[i][4]
             results.append(individual_result) 
-        return results
+        """
+        return self.testResults
     #*********Database Handler***********
+    """
     @XBlock.json_handler
     def update(self, data, suffix=''):
         #Database, user and password must be changed according to the local database
@@ -194,7 +205,7 @@ class AdaptiveTestXBlock(XBlock):
         cur.close()
         conn.close()
         return True
-
+    """
 
     # Workbench scenarios. Ignore, unless you know how to use them.
     @staticmethod

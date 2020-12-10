@@ -1,7 +1,7 @@
 """An adaptive-learning testing xblock"""
 
 import pkg_resources
-
+#import psycopg2
 from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, JSONField, Scope
 from xblock.fragment import Fragment
@@ -52,7 +52,6 @@ class AdaptiveTestXBlock(XBlock):
         frag = Fragment(html.format(self=self))
         
         frag.add_css(self.resource_string("static/css/adaptive_test.css"))
-        frag.add_css(self.resource_string("static/css/bootstrap.css"))
 
         frag.add_javascript(self.resource_string("static/js/src/jquery-1.12.4.js"))
         frag.add_javascript(self.resource_string("static/js/src/jquery-ui.js"))
@@ -61,28 +60,30 @@ class AdaptiveTestXBlock(XBlock):
         frag.initialize_js('StudentAdaptiveTestXBlock')
         return frag
 
+    #Create studio_analytics view to show test results as a table
+    def studio_analytics(self, context=None):
+        html = self.resource_string("static/html/studio_analytics.html")
+        frag = Fragment(html.format(self=self))
+        frag.add_javascript(self.resource_string("static/js/src/studio_analytics.js"))
+            
+        frag.add_css(self.resource_string("static/css/adaptive_test.css"))        
+        frag.initialize_js('StudioAnalyticsXBlock')
+        return frag
+
+    #Studio view only used to select the test
     def studio_view(self, context=None):
         """
         The primary view of the StudioAdaptiveTestXBlock, shown to students
         when viewing courses.
         """
-        if len(self.testResults) > 0:
-            html = self.resource_string("static/html/studio_analytics.html")
-            frag = Fragment(html.format(self=self))
-            frag.add_javascript(self.resource_string("static/js/src/studio_analytics.js"))
-            
-            frag.add_css(self.resource_string("static/css/adaptive_test.css"))        
-            frag.add_css(self.resource_string("static/css/bootstrap.css"))
-            frag.initialize_js('StudioAnalyticsXBlock') # Notice
 
-        else:
-            html = self.resource_string("static/html/studio_adaptive_test.html")
-            frag = Fragment(html.format(self=self))
-            frag.add_javascript(self.resource_string("static/js/src/studio_adaptive_test.js"))
+        
+        html = self.resource_string("static/html/studio_adaptive_test.html")
+        frag = Fragment(html.format(self=self))
+        frag.add_javascript(self.resource_string("static/js/src/studio_adaptive_test.js"))
 
-            frag.add_css(self.resource_string("static/css/adaptive_test.css"))        
-            frag.add_css(self.resource_string("static/css/bootstrap.css"))
-            frag.initialize_js('StudioAdaptiveTestXBlock') # Notice
+        frag.add_css(self.resource_string("static/css/adaptive_test.css"))        
+        frag.initialize_js('StudioAdaptiveTestXBlock') # Notice
 
         return frag
 
@@ -100,9 +101,42 @@ class AdaptiveTestXBlock(XBlock):
         """
         Handler that returns the test currently used
         """
-        # Returns results in case they exist
-        if self.testSolved:
-            return { 'test': self.testNumber, 'test_result': self.testResult }
+        #Create variables according to test numbers, to be compared with the tests names in databes
+        """
+        test_name = "Not selected"
+        if (self.testNumber == 1):
+            test_name = "Kolb"
+            
+        if (self.testNumber == 2): 
+            test_name = "Hermann"
+            
+        if (self.testNumber == 3):
+            test_name = "Inteligencias Multiples"
+        if (self.testNumber == 4):
+            test_name = "Honey-Alonso"
+
+        #Database query to bring student ids and resolved test by each student
+        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020', host='localhost')
+        cur2 = conn.cursor()
+        cur2.execute("SELECT * FROM resultadostest")
+        rows = cur2.fetchall()
+        conn.close()
+        #check if logged student has resolved the test selected y the teacher
+        flag = False
+        for i in range(len(rows)):
+            if((str(rows[i][1]) == self.scope_ids.user_id) and (rows[i][3]==test_name)):
+                flag = True
+                result = rows[i][4]
+        """
+        # Returns results in case student already has resolved teh selected test, returns only the test number otherwise. 
+        flag = False
+        for i in range (len(self.testResults)):
+            if ( (self.testResults[i]["user_id"]==self.scope_ids.user_id) and (self.testResults[i]["test"]==self.testNumber)):
+                flag = True
+                result = self.testResults[i]["result"]
+        
+        if flag:
+            return { 'test': self.testNumber, 'test_result': result }
         else:
             return { 'test': self.testNumber }
     
@@ -123,6 +157,7 @@ class AdaptiveTestXBlock(XBlock):
         user_test_result["test"] = self.testNumber
 
         user_test_result['user_id'] = self.scope_ids.user_id
+                            
     
         user_service = self.runtime.service(self, 'user')
         xb_user = user_service.get_current_user()
@@ -140,7 +175,37 @@ class AdaptiveTestXBlock(XBlock):
         """
         An example handler, which increments the data.
         """
+        #Database query to bring all data, ando show it in studio_analytics view
+        """
+        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020', host='localhost')
+        cur3 = conn.cursor()
+        cur3.execute("SELECT * FROM resultadostest ORDER BY id_estudiante")
+        rows = cur3.fetchall()
+        conn.close()
+        results = []
+        #devide results for each student in an array of python dictionaries
+        for i in range (len(rows)):
+            individual_result = {}
+            individual_result["id_estudiante"] = rows[i][1]
+            individual_result["fecha"] = str(rows[i][2])
+            individual_result["test"] = rows[i][3]
+            individual_result["resultado"] = rows[i][4]
+            results.append(individual_result) 
+        """
         return self.testResults
+    #*********Database Handler***********
+    """
+    @XBlock.json_handler
+    def update(self, data, suffix=''):
+        #Database, user and password must be changed according to the local database
+        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020',host='localhost')
+        cur = conn.cursor()
+        cur.execute("INSERT INTO resultadostest (id_estudiante, fecha, nombre_test, resultado) VALUES (%s,CURRENT_DATE,%s, %s)", (self.scope_ids.user_id, data['test_name'], data['result']))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return True
+    """
 
     # Workbench scenarios. Ignore, unless you know how to use them.
     @staticmethod
