@@ -1,3 +1,0 @@
-[xblock.v1]
-adaptive_test = adaptive_test:AdaptiveTestXBlock
-
