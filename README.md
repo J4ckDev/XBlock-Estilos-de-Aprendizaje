@@ -8,7 +8,11 @@ Para comprender el funcionamiento de este XBlock, es necesario haber visto la gu
 
 - [1. Características](#1-características)
   - [1.1. Test disponibles](#11-test-disponibles)
-  - [1.2. Almacenamiento de datos](#12-almacenamiento-de-datos)
+  - [1.2. Gestión de la información](#12-gestión-de-la-información)
+    - [1.2.1. Campos o fields](#121-campos-o-fields)
+    - [1.2.2. Función para cargar un test](#122-función-para-cargar-un-test)
+    - [1.2.3. Función para subir los resultados](#123-función-para-subir-los-resultados)
+    - [1.2.4. Función para mostrar los resultados](#124-función-para-mostrar-los-resultados)
 - [2. Instalación](#2-instalación)
 - [3. Modo de Uso](#3-modo-de-uso)
 
@@ -60,8 +64,43 @@ Los test actualmente implementados están basados en los siguientes modelos:
     
     Sí desea más información puede leer [aquí](https://mattec.matedu.cinvestav.mx/el_calculo/data/docs/P9.bbf0a982b7788f.pdf).
 
-### 1.2. Almacenamiento de datos
+### 1.2. Gestión de la información
+
+El XBlock permite guardar la información para cada uno de los test disponibles y dependiendo si es un profesor o un estudiante, se le muestra la información.
+
+#### 1.2.1. Campos o fields
+Los campos o fields definidos para almacenar los datos son los siguientes:
+
+|Campo o Field|Tipo|Alcance|Descripción|
+|-------------|----|-------|-----------|
+|testNumber|Integer|`user_state_summary`|Guarda el test elegido por el profesor y que se mostrará a los estudiantes para obtener su estilo de aprendizaje.|
+|testResult|`JSON`|`user_state`|Almacena el resultado del estilo de aprendizaje obtenido por un estudiante.|
+|testResults|`JSON`|`user_state_summary`|Guarda los resultados de todos los estudiantes y el estilo de aprendizaje correspondiente a cada uno de los test.|
+|testSolved|`Boolean`|`user_state`|Es una bandera que sirve para controlar cuando el estudiante ha respondido o no el test, si lo ha respondido tendrá un valor `True` en caso contrario `False`.|
+
+#### 1.2.2. Función para cargar un test
+En el archivo [`student_adaptive_test.js`](https://github.com/J4ckDev/XBlock-Estilos-de-Aprendizaje/blob/main/adaptive_test/adaptive_test/static/js/src/student_adaptive_test.js#L10) se definió una función que se ejecutará al finalizar la carga de la vista `student_adaptive_test.html`, para solicitar a la función [`load_test`](https://github.com/J4ckDev/XBlock-Estilos-de-Aprendizaje/blob/main/adaptive_test/adaptive_test/adaptive_test.py#L99) en el archivo `adaptive_test.py`, si se debe cargar o no un test al estudiante.
+
+#### 1.2.3. Función para subir los resultados
+Cuando el estudiante responde un test, una función en el archivo [`student_adaptive_test.js`](https://github.com/J4ckDev/XBlock-Estilos-de-Aprendizaje/blob/main/adaptive_test/adaptive_test/static/js/src/student_adaptive_test.js#L44) captura las respuestas, obtiene el estilo de aprendizaje del estudiante y envía el resultado a la función [`submit_test`](https://github.com/J4ckDev/XBlock-Estilos-de-Aprendizaje/blob/main/adaptive_test/adaptive_test/adaptive_test.py#L143) del archivo `adaptive_test.py`. Luego al estudiante se le muestra que estilo de aprendizaje tiene.
+
+#### 1.2.4. Función para mostrar los resultados
+Por último, cuando un profesor desea ver los resultados de todos los estudiantes, la función [`load_analytics`](https://github.com/J4ckDev/XBlock-Estilos-de-Aprendizaje/blob/main/adaptive_test/adaptive_test/adaptive_test.py#L173) es la encargada de retornar todos los valores del campo `testResults` que son procesados por [`studio_analytics.js`](https://github.com/J4ckDev/XBlock-Estilos-de-Aprendizaje/blob/main/adaptive_test/adaptive_test/static/js/src/studio_analytics.js#L8) y mostrados en `studio_analytics.html`.
 
 ## 2. Instalación
+
+Para instalar este XBlock es necesario realizar los siguientes pasos:
+
+1. Descargue este XBlock desde el *Release* o realice un `git clone` al repositorio.
+2. Si descargó desde el *Release* descomprima el archivo y cópielo a la carpeta donde tiene el entorno virtual. Sí solo realizó el `git clone`, copie la carpeta donde tiene el entorno virtual.
+3. Asegurese de inicializar el entorno virtual y ejecute el comando `pip install -r adaptive_test` para instalar el Xblock en el SDK.
+4. Inicie el servidor del XBlock SDK y abra la dirección `http://127.0.0.1:8000/`, si aparece el XBlock fue instalado correctamente.
+
+<div align="center">
+
+![Instalación correcta](./media/Fin.png)
+
+</div>
+
 ## 3. Modo de Uso
 
