@@ -1,7 +1,6 @@
 """An adaptive-learning testing xblock"""
 
 import pkg_resources
-#import psycopg2
 from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, JSONField, Scope
 from xblock.fragment import Fragment
@@ -101,33 +100,6 @@ class AdaptiveTestXBlock(XBlock):
         """
         Handler that returns the test currently used
         """
-        #Create variables according to test numbers, to be compared with the tests names in databes
-        """
-        test_name = "Not selected"
-        if (self.testNumber == 1):
-            test_name = "Kolb"
-            
-        if (self.testNumber == 2): 
-            test_name = "Hermann"
-            
-        if (self.testNumber == 3):
-            test_name = "Inteligencias Multiples"
-        if (self.testNumber == 4):
-            test_name = "Honey-Alonso"
-
-        #Database query to bring student ids and resolved test by each student
-        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020', host='localhost')
-        cur2 = conn.cursor()
-        cur2.execute("SELECT * FROM resultadostest")
-        rows = cur2.fetchall()
-        conn.close()
-        #check if logged student has resolved the test selected y the teacher
-        flag = False
-        for i in range(len(rows)):
-            if((str(rows[i][1]) == self.scope_ids.user_id) and (rows[i][3]==test_name)):
-                flag = True
-                result = rows[i][4]
-        """
         # Returns results in case student already has resolved teh selected test, returns only the test number otherwise. 
         flag = False
         for i in range (len(self.testResults)):
@@ -147,17 +119,11 @@ class AdaptiveTestXBlock(XBlock):
         """
         collectedTest = data
         user_test_result = {}
-
-        # Something should be modified in the course
-        # EDXCUT: https://github.com/mitodl/edxcut showed to be an option. 
-        # Testing was unabled to use it correctly.
-        # TODO: Take collectedTest and make modifications into the course content
         
         user_test_result["result"] = collectedTest
         user_test_result["test"] = self.testNumber
 
-        user_test_result['user_id'] = self.scope_ids.user_id
-                            
+        user_test_result['user_id'] = self.scope_ids.user_id                            
     
         user_service = self.runtime.service(self, 'user')
         xb_user = user_service.get_current_user()
@@ -173,39 +139,9 @@ class AdaptiveTestXBlock(XBlock):
     @XBlock.json_handler
     def load_analytics(self, data, suffix=''):
         """
-        An example handler, which increments the data.
-        """
-        #Database query to bring all data, ando show it in studio_analytics view
-        """
-        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020', host='localhost')
-        cur3 = conn.cursor()
-        cur3.execute("SELECT * FROM resultadostest ORDER BY id_estudiante")
-        rows = cur3.fetchall()
-        conn.close()
-        results = []
-        #devide results for each student in an array of python dictionaries
-        for i in range (len(rows)):
-            individual_result = {}
-            individual_result["id_estudiante"] = rows[i][1]
-            individual_result["fecha"] = str(rows[i][2])
-            individual_result["test"] = rows[i][3]
-            individual_result["resultado"] = rows[i][4]
-            results.append(individual_result) 
+        Show the data.
         """
         return self.testResults
-    #*********Database Handler***********
-    """
-    @XBlock.json_handler
-    def update(self, data, suffix=''):
-        #Database, user and password must be changed according to the local database
-        conn = psycopg2.connect(database='db_user',user='postgres',password='leandro21020',host='localhost')
-        cur = conn.cursor()
-        cur.execute("INSERT INTO resultadostest (id_estudiante, fecha, nombre_test, resultado) VALUES (%s,CURRENT_DATE,%s, %s)", (self.scope_ids.user_id, data['test_name'], data['result']))
-        conn.commit()
-        cur.close()
-        conn.close()
-        return True
-    """
 
     # Workbench scenarios. Ignore, unless you know how to use them.
     @staticmethod
