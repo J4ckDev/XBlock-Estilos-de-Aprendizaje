@@ -55,6 +55,7 @@ Los test actualmente implementados están basados en los siguientes modelos:
     - *Pragmático:* Las personas de este estilo de aprendizaje se caracterizan por el deseo de saber como poner en práctica todo lo aprendido.
  
     Sí desea más información sobre el modelo propuesto por Honey y Mumford, puede leer [aquí](http://www.comapp-online.de/materials/es/Handout_14_LearningStyles_EN.pdf).
+
 4. **Modelo de Dominancia Cerebral:** Es un modelo que se basa en los cuadrantes cerebrales para representar las formas diferentes de pensar, operar, crear, aprender actuar y convivir con el mundo. Los estilos de aprendizaje pueden ser:
    
    - *Lógico:* Son las personas que basan su aprendizaje en el razonamiento y los hechos para apoyarse en sus decisiones.
@@ -62,7 +63,7 @@ Los test actualmente implementados están basados en los siguientes modelos:
    - *Interpersonal:* Suelen ser las personas más idealistas y dispersas de los 4 tipos, esto las hace personas que aprenden con el autodescubrimiento, la construcción de conceptos y la búsqueda de posibilidades ocultas o no evidentes. 
    - *Holístico:* Aprende compartiendo y escuchando ideas, esto los hace buenos en el trabajo en equipo.
     
-    Sí desea más información puede leer [aquí](https://mattec.matedu.cinvestav.mx/el_calculo/data/docs/P9.bbf0a982b7788f.pdf).
+    Sí desea conocer más sobre este modelo, puede leer [aquí](https://mattec.matedu.cinvestav.mx/el_calculo/data/docs/P9.bbf0a982b7788f.pdf).
 
 ### 1.2. Gestión de la información
 
@@ -93,7 +94,7 @@ Para instalar este XBlock es necesario realizar los siguientes pasos:
 
 1. Descargue este XBlock desde el *Release* o realice un `git clone` al repositorio.
 2. Si descargó desde el *Release* descomprima el archivo y cópielo a la carpeta donde tiene el entorno virtual. Sí solo realizó el `git clone`, copie la carpeta donde tiene el entorno virtual.
-3. Asegurese de inicializar el entorno virtual y ejecute el comando `pip install -r adaptive_test` para instalar el Xblock en el SDK.
+3. Asegurese de inicializar el entorno virtual y ejecute el comando `pip install -e adaptive_test` para instalar el Xblock en el SDK.
 4. Inicie el servidor del XBlock SDK y abra la dirección `http://127.0.0.1:8000/`, si aparece el XBlock fue instalado correctamente.
 
 <div align="center">
