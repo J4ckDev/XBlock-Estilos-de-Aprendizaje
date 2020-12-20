@@ -1,1 +1,67 @@
-# XBlock Estilos de Aprendizaje
+# XBlock Estilos de Aprendizaje <!-- omit in toc -->
+
+Este XBlock fue creado con el fin de obtener el estilo de aprendizaje de los estudiantes de un curso de OpenEDX, para que el profesor conozca a partir de cualquiera de los test disponibles que material del curso debe subir y se ajuste a cada estilo de aprendizaje de los estudiantes.
+
+Para comprender el funcionamiento de este XBlock, es necesario haber visto la guía de [MyXBlock](https://github.com/J4ckDev/MyXblock) y [XBlockPrueba](https://github.com/J4ckDev/XBlockPrueba).
+
+## Contenido <!-- omit in toc -->
+
+- [1. Características](#1-características)
+  - [1.1. Test disponibles](#11-test-disponibles)
+  - [1.2. Almacenamiento de datos](#12-almacenamiento-de-datos)
+- [2. Instalación](#2-instalación)
+- [3. Modo de Uso](#3-modo-de-uso)
+
+## 1. Características
+
+En esta sección se especifican las características más relevantes del XBlock.
+
+### 1.1. Test disponibles
+
+Los test actualmente implementados están basados en los siguientes modelos:
+
+1. **Modelo de Kolb:** Se distinguen 4 posibles estilos de aprendizaje según la forma en la que las personas prefieren tratar con la información de su entorno. Los estilos de aprendizaje posibles son: 
+   
+   - *Activo o divergente:* Se caracterizan por que aprenden mejor cuando las actividades supongan un desafío, sean cortas, sean concisas y se sientan emocionados a desarrollarlas. 
+   - *Reflexivo o asimilador:* Son estudiantes que observan y analizan la información desde muchos puntos de vista, antes de sacar una conclusión; por esa razón son estudiantes que aprenden mejor en los casos donde pueden observar las cosas detenidamente, analizarlas y reflexionar antes de actuar.
+   - *Teórico o convergente:* Es el estudiante que acomoda e integra la información de forma lógica y secuencial para generar una teoría sobre lo que está aprendiendo, de esta manera lo convierte una persona investigativa para estar seguro de que todo lo aprendido es demostrable. 
+   - *Pragmático o acomodador:* Este último estilo representa a los estudiantes que se sienten cómodos colocando en práctica los nuevos conocimientos, teorías y técnicas; por ende son muy realistas, prácticos, tienen gran capacidad en resolver problemas y siempre buscan la manera más fácil de hacer las cosas.
+
+    Sí desea más información sobre el modelo de Kolb, puede leer [aquí](https://psicologiaymente.com/desarrollo/modelo-de-kolb-estilos-aprendizaje).
+
+2. **Modelo de Inteligencias Múltiples:** Este modelo define la inteligencia como el conjunto de capacidades que nos permite resolver problemas o fabricar productos valiosos en nuestra cultura; además, según la capacidad que más desarrolle un individuo puede variar de una inteligencia a otra. A continuación se hizo una tabla con los tipos de inteligencia posibles y como aprende mejor el estudiante:
+   
+    |Inteligencia|Aprende mejor|
+    |------------|-------------|
+    |Verbal o lingüística|Usando el lenguaje de forma oral o escrita.|
+    |Lógico-matemática|Haciendo uso de la lógica y razomnamiento que encuentran en los números.|
+    |Visual-Espacial|Relacionando el color, la línea, la forma y el espacio para construir o dibujar los objetos que visualiza en su mente.|
+    |Kinestésica-corporal|Tocando, moviendo y procesando la información a través de sensaciones corporales.|
+    |Musical|Escuchando y creando música o melodías.|
+    |Interpersonal|Compartiendo, entrevistando y cooperando con otros.|
+    |Intrapersonal|Trabajando solo, haciendo proyectos a su propio ritmo y teniendo sus espacios para reflexionar.|
+
+    Sí desea más información sobre este modelo, puede leer [aquí](https://fun4us.org/2016/03/14/estilos-de-aprendizaje-y-las-inteligencias-multiples/).
+
+3. **Modelo de Honey Alonso:** Parte de la teoría y los cuestionarios del modelo de Kolb; sin embargo, este modelo define una descripción más detallada para cada uno de los estilos de aprendizaje. Los estilos de aprendizaje propuestos son:
+   
+    - *Activo:*  Son personas abiertas que se implican plenamente en las nuevas experiencias para aprender cosas nuevas. 
+    - *Reflexivo:* Estas personas aprenden observando y analizando las experiencias desde diferentes puntos de vista, por lo que se toman el tiempo necesario para llegar a conclusiones apropiadas.
+    - *Teórico:* Les gusta entender la teoría detrás de las acciones, por lo que necesitan modelos, conceptos y hechos para analizarlos y sintetizarlos en una teoría lógica y sistemática. 
+    - *Pragmático:* Las personas de este estilo de aprendizaje se caracterizan por el deseo de saber como poner en práctica todo lo aprendido.
+ 
+    Sí desea más información sobre el modelo propuesto por Honey y Mumford, puede leer [aquí](http://www.comapp-online.de/materials/es/Handout_14_LearningStyles_EN.pdf).
+4. **Modelo de Dominancia Cerebral:** Es un modelo que se basa en los cuadrantes cerebrales para representar las formas diferentes de pensar, operar, crear, aprender actuar y convivir con el mundo. Los estilos de aprendizaje pueden ser:
+   
+   - *Lógico:* Son las personas que basan su aprendizaje en el razonamiento y los hechos para apoyarse en sus decisiones.
+   - *Organizado:* Tienen un pensamiento estructurado y secuencial para planificar hasta los mínimos detalles, esto los hace personas que encanta conocer el funcionamiento de las cosas y les permite aprender con la práctica. 
+   - *Interpersonal:* Suelen ser las personas más idealistas y dispersas de los 4 tipos, esto las hace personas que aprenden con el autodescubrimiento, la construcción de conceptos y la búsqueda de posibilidades ocultas o no evidentes. 
+   - *Holístico:* Aprende compartiendo y escuchando ideas, esto los hace buenos en el trabajo en equipo.
+    
+    Sí desea más información puede leer [aquí](https://mattec.matedu.cinvestav.mx/el_calculo/data/docs/P9.bbf0a982b7788f.pdf).
+
+### 1.2. Almacenamiento de datos
+
+## 2. Instalación
+## 3. Modo de Uso
+
