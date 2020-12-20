@@ -1,10 +1,10 @@
-# XBlock Estilos de Aprendizaje <!-- omit in toc -->
+# :book: XBlock Estilos de Aprendizaje <!-- omit in toc -->
 
 Este XBlock fue creado con el fin de obtener el estilo de aprendizaje de los estudiantes de un curso de OpenEDX, para que el profesor conozca a partir de cualquiera de los test disponibles que material del curso debe subir y se ajuste a cada estilo de aprendizaje de los estudiantes.
 
 Para comprender el funcionamiento de este XBlock, es necesario haber visto la guía de [MyXBlock](https://github.com/J4ckDev/MyXblock) y [XBlockPrueba](https://github.com/J4ckDev/XBlockPrueba).
 
-## Contenido <!-- omit in toc -->
+## :clipboard: Contenido <!-- omit in toc -->
 
 - [1. Características](#1-características)
   - [1.1. Test disponibles](#11-test-disponibles)
@@ -97,11 +97,64 @@ Para instalar este XBlock es necesario realizar los siguientes pasos:
 3. Asegurese de inicializar el entorno virtual y ejecute el comando `pip install -e adaptive_test` para instalar el Xblock en el SDK.
 4. Inicie el servidor del XBlock SDK y abra la dirección `http://127.0.0.1:8000/`, si aparece el XBlock fue instalado correctamente.
 
-<div align="center">
+    <div align="center">
 
-![Instalación correcta](./media/Fin.png)
+    ![Instalación correcta](./media/Fin.png)
 
-</div>
+    </div>
 
 ## 3. Modo de Uso
 
+Asegurese de tener el entorno virtual activo y el servidor del SDK ejecutándose, luego ya puede realizar los siguientes pasos:
+
+1. Para seleccionar el test con el cuál va a obtener los estilos de aprendizaje de los estudiantes, abra el navegador y dirijase a la vista de Studio siguiendo el enlace `http://127.0.0.1:8000/scenario/adaptive_test.0/studio_view/` y debe aparecer una ventana como la siguiente:
+
+    <div align="center">
+
+    ![Vista Studio para seleccionar test](./media/VistaStudio.png)
+
+    </div>
+
+    Cuando elija uno de los test y de click en el botón *Elegir* le aparecerá el sisguiente mensaje de confirmación:
+
+    <div align="center">
+
+    ![Confirmación en la selección del test](./media/ConfirmacionTest.png)
+
+    </div>
+
+    >**Nota:** Si el profesor más adelante desea seleccionar otro test, lo puede hacer aunque los estudiantes ya hayan respondido el test anteriormente seleccionado.
+
+2. Regrese a la vista de estudiante quitando abriendo el enlace `http://127.0.0.1:8000/scenario/adaptive_test.0/` y responda el test. Sí desea simular otros estudiantes agregue al final del enlace `?student=valor`, donde `valor` es el ID que le va a asignar al estudiante simulado.
+
+    <div align="center">
+
+    ![Test listo para ser respondido](./media/ResponderTest.png)
+
+    </div>
+
+    Al finalizar y enviar el cuestionario respondido, el estudiante obtendrá el estilo de aprendizaje que más lo representa.
+
+    <div align="center">
+
+    ![Estilo de aprendizaje calculado](./media/ResultadoTest.png)
+
+    </div>
+
+3. Cuando el docente desee ver los resultados debe abrir la vista de Studio y dar click en el enlace *Mostrar resultados de los test* o puede abrir el enlace directo `http://127.0.0.1:8000/scenario/adaptive_test.0/studio_analytics/`, luego podrá observar una tabla similar a la siguiente:
+
+    <div align="center">
+
+    ![Resultados de los tests](./media/ResultadosTest.png)
+
+    </div>
+
+4. Para el test de Honey Alonso existe la posibilidad de ver un gráfico de pastel para observar los resultados, solo debe dar click en el botón *Mostrar Gráfico* y podrá mirar lo siguiente:
+
+    <div align="center">
+
+    ![Gráfico de pastel](./media/Grafico.png)
+
+    </div>
+
+Es importante mencionar que este XBlock solo funciona en el XBlock SDK porque al instalalarlo en OpenEDX se obtuvieron errores de visualización que no permitieron que funcionara correctamente.
